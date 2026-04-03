@@ -1,4 +1,5 @@
 using mission11.Data;
+using mission11.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace mission11.Controllers;
@@ -21,13 +22,11 @@ public class BooksController : ControllerBase
     {
         var query = _context.Books.AsQueryable();
 
-        // Filter by category if the user selected one
         if (category != "All")
         {
             query = query.Where(b => b.Classification == category);
         }
 
-        // Sort books by title
         if (sortOrder.ToLower() == "desc")
         {
             query = query.OrderByDescending(b => b.Title);
@@ -62,5 +61,81 @@ public class BooksController : ControllerBase
             .ToList();
 
         return Ok(categories);
+    }
+
+    // GET api/books/all
+    [HttpGet("all")]
+    public IActionResult GetAllBooks()
+    {
+        var books = _context.Books
+            .OrderBy(b => b.Title)
+            .ToList();
+
+        return Ok(books);
+    }
+
+    // GET api/books/5
+    [HttpGet("{id}")]
+    public IActionResult GetBook(int id)
+    {
+        var book = _context.Books.Find(id);
+
+        if (book == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(book);
+    }
+
+    // POST api/books
+    [HttpPost]
+    public IActionResult AddBook([FromBody] Book newBook)
+    {
+        _context.Books.Add(newBook);
+        _context.SaveChanges();
+
+        return Ok(newBook);
+    }
+
+    // PUT api/books/5
+    [HttpPut("{id}")]
+    public IActionResult UpdateBook(int id, [FromBody] Book updatedBook)
+    {
+        var existingBook = _context.Books.Find(id);
+
+        if (existingBook == null)
+        {
+            return NotFound();
+        }
+
+        existingBook.Title = updatedBook.Title;
+        existingBook.Author = updatedBook.Author;
+        existingBook.Publisher = updatedBook.Publisher;
+        existingBook.Isbn = updatedBook.Isbn;
+        existingBook.Classification = updatedBook.Classification;
+        existingBook.PageCount = updatedBook.PageCount;
+        existingBook.Price = updatedBook.Price;
+
+        _context.SaveChanges();
+
+        return Ok(existingBook);
+    }
+
+    // DELETE api/books/5
+    [HttpDelete("{id}")]
+    public IActionResult DeleteBook(int id)
+    {
+        var book = _context.Books.Find(id);
+
+        if (book == null)
+        {
+            return NotFound();
+        }
+
+        _context.Books.Remove(book);
+        _context.SaveChanges();
+
+        return NoContent();
     }
 }

@@ -1,20 +1,21 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import BookList from './components/BookList'
 import CartPage from './components/CartPage'
+import AdminBooks from './components/AdminBooks'
+import BookForm from './components/BookForm'
 
-// Main app with routes for shopping page and cart page
+// Main app with routes
 function App() {
-  console.log('App component rendering')
   return (
-    <div>
-      <h1>App is working!</h1>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<BookList />} />
-          <Route path="/cart" element={<CartPage />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<BookList />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/adminbooks" element={<AdminBooks />} />
+        <Route path="/addbook" element={<BookForm />} />
+        <Route path="/editbook/:id" element={<BookForm />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

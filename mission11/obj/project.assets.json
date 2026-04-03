@@ -2509,11 +2509,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nataliecastro/RiderProjects/mission11/mission11/mission11.csproj",
+      "projectUniqueName": "/Users/nataliecastro/Documents/IS413/mission11-final/mission11/mission11.csproj",
       "projectName": "mission11",
-      "projectPath": "/Users/nataliecastro/RiderProjects/mission11/mission11/mission11.csproj",
+      "projectPath": "/Users/nataliecastro/Documents/IS413/mission11-final/mission11/mission11.csproj",
       "packagesPath": "/Users/nataliecastro/.nuget/packages/",
-      "outputPath": "/Users/nataliecastro/RiderProjects/mission11/mission11/obj/",
+      "outputPath": "/Users/nataliecastro/Documents/IS413/mission11-final/mission11/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/nataliecastro/.nuget/NuGet/NuGet.Config"
