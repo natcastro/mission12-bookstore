@@ -9,7 +9,7 @@
 
     // Load all books from the API
     function loadBooks() {
-        fetch('http://localhost:5037/api/books/all')
+        fetch('https://library-nat-bqhzdkbpa0g9hegy.westus2-01.azurewebsites.net/api/books/all')
         .then((res) => res.json())
         .then((data) => setBooks(data))
         .catch((error) => console.log('Error loading admin books:', error))
@@ -22,7 +22,7 @@
 
     // Delete a book, then refresh the table
     function deleteBook(id: number) {
-        fetch(`http://localhost:5037/api/books/${id}`, {
+        fetch(`https://library-nat-bqhzdkbpa0g9hegy.westus2-01.azurewebsites.net/api/books/${id}`, {
         method: 'DELETE',
         }).then(() => loadBooks())
     }

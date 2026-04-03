@@ -3,6 +3,7 @@ import type { Book } from '../types/Book'
 import type { CartItem } from '../types/CartItem'
 import { useNavigate } from 'react-router-dom'
 
+
 // This component shows books with pagination, sorting, category filtering, and cart summary
 function BookList() {
   console.log('BookList component rendering')
@@ -44,7 +45,7 @@ function BookList() {
   // Load categories one time when the page starts
   useEffect(() => {
     console.log('Loading categories...')
-    fetch('http://localhost:5037/api/books/categories')
+    fetch('https://library-nat-bqhzdkbpa0g9hegy.westus2-01.azurewebsites.net/api/books/categories')
       .then((res) => res.json())
       .then((data) => {
         console.log('Categories loaded:', data)
@@ -57,7 +58,7 @@ function BookList() {
   useEffect(() => {
     console.log('Loading books with params:', { pageNum, pageSize, sortOrder, selectedCategory })
     fetch(
-      `http://localhost:5037/api/books?pageNum=${pageNum}&pageSize=${pageSize}&sortOrder=${sortOrder}&category=${selectedCategory}`
+      `https://library-nat-bqhzdkbpa0g9hegy.westus2-01.azurewebsites.net/api/books?pageNum=${pageNum}&pageSize=${pageSize}&sortOrder=${sortOrder}&category=${selectedCategory}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -108,8 +109,10 @@ function BookList() {
 
   return (
     <div className="container mt-4">
-      <h1 className="mb-3">Online Bookstore</h1>
-      <p className="mb-4">This page shows books from the bookstore database.</p>
+      <div className="bg-primary text-white p-4 rounded mb-4">
+        <h1 className="display-4">Online Bookstore</h1>
+        <p className="lead">Discover your next favorite book from our curated collection.</p>
+      </div>
 
       {/* Small cart summary at the top of the page */}
       <div className="alert alert-info d-flex justify-content-between align-items-center">
@@ -118,12 +121,20 @@ function BookList() {
             {cartTotal.toFixed(2)}
           </div>
 
-          <button
-            className="btn btn-outline-primary btn-sm"
-            onClick={() => navigate('/cart')}
-          >
-            View Cart
-          </button>
+          <div>
+            <button
+              className="btn btn-outline-primary btn-sm me-2"
+              onClick={() => navigate('/cart')}
+            >
+              View Cart
+            </button>
+            <button
+              className="btn btn-outline-secondary btn-sm"
+              onClick={() => navigate('/adminbooks')}
+            >
+              Admin
+            </button>
+          </div>
         </div>
 
       {/* Controls for page size, sorting, and category filter */}
